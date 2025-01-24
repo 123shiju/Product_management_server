@@ -1,4 +1,4 @@
-const Product = require("../Models/productModel");
+const productData = require("../Models/productModel.js");
 const multer = require("multer");
 const path = require("path");
 
@@ -62,7 +62,7 @@ exports.addProduct = async (req, res) => {
         }
       }
 
-      const newProduct = new Product({
+      const newProduct = new productData({
         title,
         variants: JSON.parse(variants),
         subcategory,
@@ -87,7 +87,7 @@ exports.addProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await productData.find();
 
     res.status(200).json({
       message: "Products retrieved successfully",
@@ -105,7 +105,7 @@ exports.getProductById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const product = await Product.findById(id);
+    const product = await productData.findById(id);
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -128,7 +128,7 @@ exports.updateProduct = async (req, res) => {
   const { title, variants, subCategory, description, image } = req.body;
 
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(
+    const updatedProduct = await productData.findByIdAndUpdate(
       id,
       { title, variants, subCategory, description, image },
       { new: true, runValidators: true }
