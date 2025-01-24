@@ -15,7 +15,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = ['https://product-managment-client.onrender.com/']; 
+const allowedOrigins = ['https://product-managment-client.onrender.com']; 
 
 app.use(cors({
   origin: allowedOrigins,
